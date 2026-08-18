@@ -15,10 +15,12 @@ async function getEntry(id: string): Promise<EntryCard | null> {
   const { data } = await supabase
     .from("entries")
     .select(
-      `id, term, gloss, gloss_secondary, part_of_speech, example_term, example_gloss, note,
-       status, editor_checked, score, flag_count, created_at, submitted_by,
-       regions!inner ( slug, name, area, color ),
-       profiles!inner ( handle )`,
+      // Two rules here, both learned the hard way. PostgREST rejects any
+      // whitespace in a select parameter, so this stays on one line. And
+      // entries reaches profiles three ways (submitted_by, reviewed_by, and
+      // through votes), so the foreign key must be named or it refuses to
+      // guess and the query fails.
+      "id,term,gloss,gloss_secondary,part_of_speech,example_term,example_gloss,note,status,editor_checked,score,flag_count,created_at,submitted_by,regions!inner(slug,name,area,color),profiles!entries_submitted_by_fkey(handle)",
     )
     .eq("id", id)
     .maybeSingle();
@@ -167,9 +169,13 @@ export default async function EntryPage({
                 <EditorMark size={13} className="text-seal" />
                 Checked by an editor
               </span>
+            ) : entry.status === "verified" ? (
+              <span className="font-mono text-[11px] uppercase tracking-[0.09em] text-muted">
+                Verified by {entry.score} votes
+              </span>
             ) : (
               <span className="font-mono text-[11px] uppercase tracking-[0.09em] text-faint">
-                Verified by {entry.score} votes
+                Not yet verified
               </span>
             )}
             <span className="numeric-tabular text-[13px] text-faint">

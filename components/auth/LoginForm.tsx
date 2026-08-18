@@ -58,10 +58,10 @@ export function LoginForm({
   const [state, formAction] = useActionState(requestMagicLink, initial);
 
   const linkError =
-    initialError === "expired"
-      ? "That link has expired. Request a new one below."
+    initialError === "missing_code"
+      ? "That link was incomplete. Request a new one below."
       : initialError
-        ? "That link could not be read. Request a new one below."
+        ? `Sign in failed: ${initialError}. Request a new link below.`
         : undefined;
 
   return (

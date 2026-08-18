@@ -73,8 +73,8 @@ function Confirmation({
       </div>
 
       <p className="mt-6 max-w-[52ch] text-[15px] leading-relaxed text-muted">
-        It is in the review queue now. Once an editor checks it, or enough people
-        vouch for it, it joins the dictionary.
+        It is in the dictionary already. Once an editor checks it, or enough
+        people vouch for it, it earns the verified seal.
       </p>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">

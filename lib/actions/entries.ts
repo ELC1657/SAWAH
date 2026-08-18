@@ -78,7 +78,7 @@ export async function submitEntry(
 
   const { data: region } = await supabase
     .from("regions")
-    .select("id, name, color, dictionary_id, dictionaries!inner(slug)")
+    .select("id,name,color,dictionary_id,dictionaries!inner(slug)")
     .eq("slug", data.regionSlug)
     .eq("dictionaries.slug", DEFAULT_DICTIONARY)
     .maybeSingle();
@@ -105,7 +105,7 @@ export async function submitEntry(
       note: data.note ?? null,
       submitted_by: profile.id,
     })
-    .select("id, term, gloss, gloss_secondary")
+    .select("id,term,gloss,gloss_secondary")
     .single();
 
   if (error) {

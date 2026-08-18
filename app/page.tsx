@@ -61,8 +61,8 @@ export default async function HomePage({
         </h1>
         <p className="mt-4 max-w-[62ch] text-[16px] leading-relaxed text-ink-soft">
           Sasak has five dialects and no standard spelling. Every word here was
-          submitted by someone who speaks it, tagged with the dialect it came from,
-          and checked before it appeared.
+          submitted by someone who speaks it and tagged with the dialect it came
+          from. Entries an editor has checked carry a seal.
         </p>
         <p className="numeric-tabular mt-5 font-mono text-[11px] uppercase tracking-[0.09em] text-faint">
           {total} {total === 1 ? "entry" : "entries"}
@@ -98,7 +98,7 @@ export default async function HomePage({
         {rows.length === 0 ? (
           <div className="border-t border-hairline px-8 py-20 text-center">
             <p className="font-display text-[24px] leading-tight text-ink">
-              {activeRegion ? `Nothing from ${activeRegion.name} yet` : "No verified entries yet"}
+              {activeRegion ? `Nothing from ${activeRegion.name} yet` : "No entries yet"}
             </p>
             <p className="mx-auto mt-2 max-w-[42ch] text-[15px] leading-relaxed text-muted">
               {activeRegion

@@ -36,7 +36,7 @@ export default async function ContributionsPage() {
   const supabase = await createClient();
   const { data } = await supabase
     .from("entries")
-    .select("id, term, gloss, status, editor_checked, score, created_at, regions(name, color)")
+    .select("id,term,gloss,status,editor_checked,score,created_at,regions(name,color)")
     .eq("submitted_by", profile.id)
     .order("created_at", { ascending: false });
 

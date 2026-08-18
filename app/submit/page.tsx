@@ -15,7 +15,7 @@ export default async function SubmitPage() {
   const supabase = await createClient();
   const { data } = await supabase
     .from("regions")
-    .select("*, dictionaries!inner(slug)")
+    .select("*,dictionaries!inner(slug)")
     .eq("dictionaries.slug", DEFAULT_DICTIONARY)
     .order("sort_order");
 
@@ -27,8 +27,8 @@ export default async function SubmitPage() {
         Add a word
       </h1>
       <p className="mt-4 max-w-[58ch] text-[16px] leading-relaxed text-ink-soft">
-        One word or phrase at a time. Everything you send starts in the review
-        queue, and it is credited to{" "}
+        One word or phrase at a time. It goes live straight away and is checked
+        afterwards, credited to{" "}
         <span className="font-mono text-[14px] text-ink">{profile.handle}</span>,
         never to your email.
       </p>

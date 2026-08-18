@@ -1,9 +1,9 @@
 import type { EntryStatus } from "@/types/database";
 
 const COPY: Record<EntryStatus, { label: string; className: string }> = {
-  pending: { label: "In review", className: "text-muted" },
-  verified: { label: "Published", className: "text-seal" },
-  rejected: { label: "Not accepted", className: "text-danger" },
+  pending: { label: "Live, unverified", className: "text-muted" },
+  verified: { label: "Verified", className: "text-seal" },
+  rejected: { label: "Removed", className: "text-danger" },
 };
 
 /** Status is set in mono micro type, the same register as dialect labels. */
