@@ -141,7 +141,15 @@ as $$
 declare
   is_admin boolean;
 begin
-  select (role = 'admin') into is_admin from public.profiles where id = auth.uid();
+  -- Trusted server contexts, and updates driven by our own triggers, are not
+  -- client input. Without this the vote trigger below cannot write a promotion,
+  -- because it runs as whoever cast the vote.
+  if current_user in ('postgres', 'supabase_admin', 'service_role')
+     or coalesce(current_setting('sawah.system_update', true), 'off') = 'on' then
+    return new;
+  end if;
+
+  select (p.role = 'admin') into is_admin from public.profiles p where p.id = auth.uid();
 
   if coalesce(is_admin, false) then
     return new;
@@ -169,13 +177,15 @@ security definer
 set search_path = public
 as $$
 declare
-  target uuid := coalesce(new.entry_id, old.entry_id);
-  total  int;
-  cur    public.entries%rowtype;
+  target      uuid := coalesce(new.entry_id, old.entry_id);
+  total       int;
+  cur         public.entries%rowtype;
+  next_status text;
 begin
-  select coalesce(sum(value), 0) into total from public.votes where entry_id = target;
-  select * into cur from public.entries where id = target;
+  select coalesce(sum(v.value), 0) into total
+    from public.votes v where v.entry_id = target;
 
+  select * into cur from public.entries e where e.id = target;
   if cur.id is null then
     return coalesce(new, old);
   end if;
@@ -184,21 +194,27 @@ begin
   -- reviewed_by. That column is reserved for a human moderator, which is what
   -- makes entries.editor_checked meaningful.
   -- An admin decision is terminal and votes cannot undo it.
+  next_status := cur.status;
   if cur.status = 'pending' then
     if total >= public.promote_threshold() and cur.flag_count = 0 then
-      update public.entries
-         set score = total, status = 'verified', reviewed_at = now()
-       where id = target;
-      return coalesce(new, old);
+      next_status := 'verified';
     elsif total <= public.reject_threshold() then
-      update public.entries
-         set score = total, status = 'rejected', reviewed_at = now()
-       where id = target;
-      return coalesce(new, old);
+      next_status := 'rejected';
     end if;
   end if;
 
-  update public.entries set score = total where id = target;
+  perform set_config('sawah.system_update', 'on', true);
+
+  if next_status is distinct from cur.status then
+    update public.entries e
+       set score = total, status = next_status, reviewed_at = now()
+     where e.id = target;
+  else
+    update public.entries e set score = total where e.id = target;
+  end if;
+
+  perform set_config('sawah.system_update', 'off', true);
+
   return coalesce(new, old);
 end
 $$;
@@ -219,8 +235,12 @@ declare
   total  int;
 begin
   select count(*) into total
-    from public.flags where entry_id = target and status = 'open';
-  update public.entries set flag_count = total where id = target;
+    from public.flags f where f.entry_id = target and f.status = 'open';
+
+  perform set_config('sawah.system_update', 'on', true);
+  update public.entries e set flag_count = total where e.id = target;
+  perform set_config('sawah.system_update', 'off', true);
+
   return coalesce(new, old);
 end
 $$;
