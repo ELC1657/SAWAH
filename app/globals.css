@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------- tokens ----
+   Warm paper, ink that is not black, and no chroma at all in the neutrals.
+   All colour in this product belongs to the dialect regions.
+---------------------------------------------------------------------------- */
+@theme {
+  --color-paper:           #FBF9F5;
+  --color-paper-sunk:      #F4F1EA;
+  --color-surface:         #FFFFFF;
+  --color-ink:             #1B1917;
+  --color-ink-soft:        #3D3934;
+  --color-muted:           #6B6660;
+  --color-faint:           #9C958B;
+  --color-hairline:        #E6E1D8;
+  --color-hairline-strong: #D4CCBE;
+
+  /* The one accent outside the dialect palette. A stamp red, hotter than the
+     muted terracotta dialect, so an editor mark never reads as a sixth region. */
+  --color-seal:   #C0341F;
+  /* Errors sit lower and browner so they never echo the seal. */
+  --color-danger: #8C2F1D;
+
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --shadow-rest: 0 1px 2px rgba(27, 25, 23, 0.05);
+  --shadow-lift: 0 8px 24px -8px rgba(27, 25, 23, 0.14);
+  --shadow-pop:  0 16px 40px -12px rgba(27, 25, 23, 0.18);
+
+  --radius-input: 2px;
+  --radius-card: 6px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------- base layer --- */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-ink) 12%, transparent);
+  }
+
+  /* one focus treatment, everywhere, and it is not a browser default */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* the display face is only ever used for headwords and headings */
+  .font-display {
+    font-optical-sizing: auto;
+    font-variation-settings: "SOFT" 20, "WONK" 0;
+  }
+}
+
+@layer utilities {
+  /* dialect colour is injected per element as --region, tints derive from it */
+  .region-tint {
+    background-color: color-mix(in oklab, var(--region) 7%, var(--color-surface));
+  }
+  .region-tint-strong {
+    background-color: color-mix(in oklab, var(--region) 14%, var(--color-surface));
+  }
+  .region-text {
+    color: color-mix(in oklab, var(--region) 88%, var(--color-ink));
+  }
+  .region-rule {
+    background-color: var(--region);
+  }
+
+  .numeric-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* motion is a courtesy, never a requirement */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
