@@ -1,0 +1,137 @@
+SAWAH LICENCE
+Copyright (c) 2026 Emiliano Zornetta. All rights reserved.
+
+This project has two halves, and they are licensed differently on purpose.
+
+  THE CODE            open to read, closed to use.      Part A below.
+  THE DICTIONARY      open to everyone, for anything.   Part B below.
+
+The software is published so it can be read and learned from, not so it can be
+copied, deployed or sold. The words are the opposite: they belong to the people
+who speak the language, and anyone may take them and do as they wish.
+
+===============================================================================
+PART A. THE CODE
+===============================================================================
+
+Applies to all source code, design, styling, generated map geometry, database
+schema, assets and documentation in this repository.
+
+A1. DEFINITIONS
+
+    "Software"  the material described immediately above.
+    "Owner"     the copyright holder named at the top of this file.
+    "You"       any person or entity reading or using the Software.
+
+A2. YOU MAY
+
+    a. View, read and study the Software, in full, for any purpose.
+    b. Quote excerpts in commentary, teaching, review, journalism or research,
+       with attribution to SAWAH.
+    c. Fork this repository, modify your fork, and run it on your own machine
+       for the single purpose of preparing a contribution offered back to the
+       Owner under section A4.
+
+A3. YOU MAY NOT
+
+    Without prior written permission from the Owner:
+
+    a. Deploy, host, publish or otherwise make the Software available to anyone
+       else, modified or unmodified, in whole or in part.
+    b. Use the Software or any part of it to build, run or operate any product,
+       service or website, whether or not it resembles SAWAH, and whether or not
+       money changes hands.
+    c. Sell, rent, lease, sublicense or otherwise commercialise the Software, or
+       charge anyone for access to it or to anything built from it.
+    d. Distribute the Software, or any modified version of it, to any third
+       party.
+    e. Create or keep a modified version of the Software for any purpose other
+       than the contribution route in A2(c).
+    f. Remove or obscure this Licence, or any copyright or attribution notice.
+
+    Reading it is free. Running it for anyone but yourself is not.
+
+A3b. FORKING, AND WHAT THIS LICENCE DOES NOT CLAIM
+
+    If this repository is published on a platform whose terms give other users
+    the right to fork public repositories, that right comes from the platform,
+    not from this Licence, and this Licence does not purport to remove it.
+
+    What this Licence governs is what you may do with a copy once you have one.
+    Preparing a contribution under A2(c) is permitted. Deploying it, publishing
+    it, distributing it, building a product on it, or keeping a modified version
+    for any other purpose is not, and remains restricted by copyright whether or
+    not the copy was obtained by forking.
+
+A4. CONTRIBUTIONS
+
+    Pull requests are welcome. Whether to accept one is entirely the Owner's
+    decision, and proposing a change gives you no right to make it.
+
+    By submitting a contribution you confirm it is your own work, or that you
+    have the right to submit it, and you grant the Owner a perpetual, worldwide,
+    non-exclusive, irrevocable, royalty-free, sublicensable licence to use,
+    reproduce, modify, publish and distribute it as part of the Software,
+    including under any licence the Owner may later adopt.
+
+    You keep the copyright in what you wrote. This grant exists so the Owner can
+    ship it without having to ask you again years later.
+
+A5. NO WARRANTY
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    OWNER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE
+    SOFTWARE OR ITS USE.
+
+A6. TERMINATION
+
+    Any breach of A3 ends your rights under Part A immediately and
+    automatically. Sections A4, A5 and this section survive.
+
+A7. ANYTHING ELSE
+
+    For any use Part A does not permit, ask. Permission is given in writing or
+    not at all: emzo1657@gmail.com
+
+===============================================================================
+PART B. THE DICTIONARY CONTENT
+===============================================================================
+
+Applies to the words themselves: every Sasak headword, translation, Indonesian
+gloss, example sentence, usage note, dialect attribution and recording
+submitted to SAWAH by contributors.
+
+B1. LICENCE
+
+    Dictionary Content is released under the Creative Commons Attribution 4.0
+    International licence (CC BY 4.0).
+
+    https://creativecommons.org/licenses/by/4.0/
+
+    You may copy it, publish it, translate it, build on it, print it, feed it to
+    a language model, put it in a textbook, or sell something made from it. You
+    do not need permission and you do not need to ask.
+
+    The single condition is credit: say it came from SAWAH, and link back where
+    it is reasonable to do so.
+
+B2. WHY IT IS OPEN
+
+    A language does not belong to whoever built the website that recorded it. It
+    belongs to the people who speak it. Locking Sasak words behind the same
+    terms as the software would make this project a worse version of the problem
+    it exists to fix.
+
+    Nothing in Part A restricts Part B. Where the two appear to conflict, Part B
+    wins for content and Part A wins for code.
+
+B3. CONTRIBUTORS
+
+    By submitting Dictionary Content you agree it is released under CC BY 4.0 as
+    described above, and you confirm you have the right to submit it.
+
+    Contributions are credited to an anonymous handle rather than a name, and
+    attribution under B1 is to SAWAH as a whole rather than to individual
+    contributors.
