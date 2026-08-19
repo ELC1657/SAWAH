@@ -1,22 +1,28 @@
 # SAWAH
 
-A crowdsourced Sasak to English dictionary, written by the people who speak the
-language.
+SAWAH records languages that were never written down. It starts with Sasak.
 
 **[sawah.world](https://sawah.world)**
 
-Sasak is spoken by around three million people on Lombok, Indonesia. It has five
-dialects, no standard spelling, and almost nothing written down that a learner
-can actually open. SAWAH collects words together with the dialect they came
-from, translates them into English, and keeps an Indonesian gloss alongside so
-Sasak speakers can work in the other direction.
+Around three million people speak Sasak, the language of Lombok, Indonesia.
+Almost none of it has ever been written down. Indonesian is the language of
+school, work and the internet there, and each generation carries a little less
+of the vocabulary that exists nowhere but in speech.
+
+Every word is recorded with the dialect it came from and translated into both
+English and Indonesian, so it reaches a learner abroad and a speaker at home.
+Five dialects, no standard spelling, and a verification mark on the entries an
+editor has checked.
+
+Sasak is the first language on the map, not the only one intended for it. The
+schema has handled multiple dictionaries since its first migration.
 
 ---
 
 ## What it does
 
-- **Trilingual entries.** A Sasak headword, an English translation, an optional
-  Indonesian bridge, example sentences and usage notes.
+- **Trilingual entries.** A Sasak headword with English and Indonesian
+  translations, both required, plus example sentences and usage notes.
 - **Five dialects, five colours.** Kuto-Kute, Ngeto-Ngete, Ngeno-Ngene,
   Meno-Mene and Meriaq-Meriku. Each owns a colour that follows its words
   everywhere they appear.

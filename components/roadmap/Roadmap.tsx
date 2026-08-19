@@ -66,7 +66,7 @@ const PHASES: Phase[] = [
       {
         name: "Search across three languages",
         detail:
-          "One query reaches Sasak, English and Indonesian at once, with fuzzy matching because Sasak has no standard spelling and the same word is typed four ways.",
+          "One field reaches Sasak, English and Indonesian at once, with fuzzy matching because Sasak has no standard spelling and the same word gets typed four ways. Results narrow as you type and the query stays in the URL, so a search is shareable.",
       },
       {
         name: "Abuse controls",
@@ -84,11 +84,6 @@ const PHASES: Phase[] = [
     color: REGIONS[2].color,
     state: "next",
     features: [
-      {
-        name: "Search field",
-        detail:
-          "The search engine is already running underneath the site. This gives it a front door, with suggestions as you type and results that reorder live.",
-      },
       {
         name: "Community verification",
         detail:

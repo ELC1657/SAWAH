@@ -27,7 +27,11 @@ export const submissionSchema = z.object({
     .trim()
     .min(1, "An English translation is required")
     .max(160, "160 characters maximum"),
-  glossSecondary: optionalText(160),
+  glossSecondary: z
+    .string()
+    .trim()
+    .min(1, "An Indonesian translation is required")
+    .max(160, "160 characters maximum"),
   regionSlug: z.string().min(1, "Choose the dialect this word comes from"),
   partOfSpeech: z.enum(posValues).optional(),
   exampleTerm: optionalText(240),

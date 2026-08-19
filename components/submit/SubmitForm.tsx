@@ -95,6 +95,7 @@ export function SubmitForm({ regions }: { regions: Region[] }) {
   const [region, setRegion] = useState("");
   const [term, setTerm] = useState("");
   const [gloss, setGloss] = useState("");
+  const [glossId, setGlossId] = useState("");
   const [formKey, setFormKey] = useState(0);
   const renderedAt = useRef<number>(0);
 
@@ -113,6 +114,7 @@ export function SubmitForm({ regions }: { regions: Region[] }) {
         onAgain={() => {
           setTerm("");
           setGloss("");
+          setGlossId("");
           setRegion("");
           setFormKey((k) => k + 1);
           window.location.href = "/submit";
@@ -165,13 +167,16 @@ export function SubmitForm({ regions }: { regions: Region[] }) {
       <div className="grid gap-6 sm:grid-cols-2">
         <Field
           label="Indonesian translation"
-          optional
           error={err.glossSecondary}
-          hint="Helps Sasak speakers reach the English."
+          counter={`${glossId.length}/160`}
+          hint="Every entry carries both languages, so Sasak speakers get the word too."
         >
           <input
             name="glossSecondary"
+            required
             maxLength={160}
+            value={glossId}
+            onChange={(e) => setGlossId(e.target.value)}
             className={inputClass}
             placeholder="besar, agung"
           />

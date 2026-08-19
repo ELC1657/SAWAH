@@ -39,8 +39,9 @@ export async function moderateEntry(
 
   if (error) return { status: "error", message: "Could not save that." };
 
+  // "layout" so the masthead dot recounts, not just the page body
+  revalidatePath("/", "layout");
   revalidatePath("/admin");
-  revalidatePath("/");
   revalidatePath(`/entry/${entryId}`);
   return { status: "idle" };
 }
@@ -67,6 +68,7 @@ export async function resolveFlag(
 
   if (error) return { status: "error", message: "Could not save that." };
 
+  revalidatePath("/", "layout");
   revalidatePath("/admin/flags");
   revalidatePath("/admin");
   return { status: "idle" };

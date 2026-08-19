@@ -5,6 +5,7 @@ import { Masthead } from "@/components/ui/Masthead";
 import { PreviewBanner } from "@/components/ui/PreviewBanner";
 import { isPreviewMode } from "@/lib/preview";
 import { getSessionProfile } from "@/lib/supabase/session";
+import { createClient } from "@/lib/supabase/server";
 import { REGIONS } from "@/lib/regions";
 import "./globals.css";
 
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s · SAWAH",
   },
   description:
-    "A Sasak to English dictionary built by its speakers, one word and one dialect at a time.",
+    "SAWAH records languages that were never written down, starting with Sasak: three million speakers on Lombok, almost nothing on paper. Every word in English and Indonesian, written by the people who speak it.",
 };
 
 const ROADMAP_TICKS = REGIONS.map((r) => r.color);
@@ -40,11 +41,29 @@ export default async function RootLayout({
 }) {
   const profile = await getSessionProfile();
 
+  // Anything sitting unverified, plus anything reported. Only ever counted for
+  // an admin: nobody else sees the link, so nobody else pays for the query.
+  let awaiting = 0;
+  if (profile?.role === "admin") {
+    const supabase = await createClient();
+    const [pending, reports] = await Promise.all([
+      supabase
+        .from("entries")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "pending"),
+      supabase
+        .from("flags")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "open"),
+    ]);
+    awaiting = (pending.count ?? 0) + (reports.count ?? 0);
+  }
+
   return (
     <html lang="en" className={`${fraunces.variable} ${plexMono.variable}`}>
       <body className="min-h-dvh antialiased">
         {isPreviewMode ? <PreviewBanner /> : null}
-        <Masthead profile={profile} />
+        <Masthead profile={profile} awaiting={awaiting} />
         <main className="mx-auto w-full max-w-[1120px] px-6 pb-32">{children}</main>
         <footer className="border-t border-hairline">
           <div className="mx-auto flex w-full max-w-[1120px] flex-col gap-2 px-6 py-10 text-[13px] text-faint sm:flex-row sm:items-center sm:justify-between">

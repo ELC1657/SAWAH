@@ -26,7 +26,13 @@ function Wordmark() {
   );
 }
 
-export function Masthead({ profile }: { profile: Profile | null }) {
+export function Masthead({
+  profile,
+  awaiting = 0,
+}: {
+  profile: Profile | null;
+  awaiting?: number;
+}) {
   return (
     <header className="sticky top-0 z-40 border-b border-hairline bg-paper/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full max-w-[1120px] items-center justify-between gap-6 px-6">
@@ -42,9 +48,20 @@ export function Masthead({ profile }: { profile: Profile | null }) {
           {profile?.role === "admin" ? (
             <Link
               href="/admin"
-              className="rounded-[2px] px-3 py-2 text-[14px] text-muted transition-colors duration-150 hover:bg-paper-sunk hover:text-ink"
+              aria-label={
+                awaiting > 0
+                  ? `Review, ${awaiting} item${awaiting === 1 ? "" : "s"} waiting`
+                  : "Review"
+              }
+              className="relative rounded-[2px] px-3 py-2 text-[14px] text-muted transition-colors duration-150 hover:bg-paper-sunk hover:text-ink"
             >
               Review
+              {awaiting > 0 ? (
+                <span
+                  aria-hidden="true"
+                  className="absolute right-1 top-1.5 h-[7px] w-[7px] rounded-full bg-seal ring-2 ring-paper"
+                />
+              ) : null}
             </Link>
           ) : null}
           <AccountMenu profile={profile} />

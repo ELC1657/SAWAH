@@ -43,7 +43,7 @@ export async function submitEntry(
   const parsed = submissionSchema.safeParse({
     term: formData.get("term") ?? "",
     gloss: formData.get("gloss") ?? "",
-    glossSecondary: opt(formData.get("glossSecondary")),
+    glossSecondary: formData.get("glossSecondary") ?? "",
     regionSlug: formData.get("regionSlug") ?? "",
     partOfSpeech: opt(formData.get("partOfSpeech")),
     exampleTerm: opt(formData.get("exampleTerm")),
@@ -98,7 +98,7 @@ export async function submitEntry(
       region_id: region.id,
       term: data.term,
       gloss: data.gloss,
-      gloss_secondary: data.glossSecondary ?? null,
+      gloss_secondary: data.glossSecondary,
       part_of_speech: data.partOfSpeech ?? null,
       example_term: data.exampleTerm ?? null,
       example_gloss: data.exampleGloss ?? null,
@@ -133,7 +133,8 @@ export async function submitEntry(
     return { status: "error", message: "Could not save that. Try again." };
   }
 
-  revalidatePath("/");
+  // "layout" so an admin's review dot appears without a hard refresh
+  revalidatePath("/", "layout");
   revalidatePath("/contributions");
 
   return {
